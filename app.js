@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 const path=require('path');
 app.set('views',path.join(__dirname,'views'))
 
-
+//schema setup
 var  memeSchema=new mongoose.Schema({
     name:String,
     url:String,
