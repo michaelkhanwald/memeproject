@@ -14,7 +14,7 @@ const mongoose=require('mongoose');
 
  var bodyParser=require("body-parser");
  //var request=require("request");
- 
+ //mongoose connection
 mongoose.connect('mongodb://localhost/memeapp', {
     useNewUrlParser: true,
     useCreateIndex: true,
