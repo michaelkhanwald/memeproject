@@ -1,0 +1,19 @@
+<%- include("./partials/header") %>
+<div class="ui main text container segment">
+    <div class="ui huge header">Meme Stream</div>
+<form class="ui form" action="/memers" method="POST" >
+    <div class="field">
+      <label>Owner</label>
+      <input type="text" name="meme[name]" placeholder="Enter your full name">
+    </div>
+    <div class="field">
+      <label>Caption</label>
+      <input type="text" name="meme[caption]" placeholder="Be creative with caption">
+    </div>
+    <div class="field">
+        <label>Meme Url</label>
+        <input type="text" name="meme[url]" placeholder="Enter Url of Meme">
+      </div>
+    <button class="ui button" type="submit">Submit</button>
+  </form>
+</div>
