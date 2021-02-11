@@ -42,14 +42,23 @@ var  memeSchema=new mongoose.Schema({
     
 });
 
-memeSchema.set('toJSON', {
-    virtuals: true,
-    versionKey:false,
-    transform: function (doc, ret) {   delete ret._id  }
-  });
+
+
 //memeSchema.plugin(normalize);
 
 var Meme=mongoose.model("Meme",memeSchema);
+memeSchema.set('toJSON', {
+    transform: function (doc, ret, options) {
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.__v;
+    }
+}); 
+// memeSchema.set('toJSON', {
+//     virtuals: true,
+//     versionKey:false,
+//     transform: function (doc, ret) {   delete ret._id  }
+//   });
 
 // Meme.create({
 //     name:"shinigami",
@@ -86,7 +95,15 @@ app.get("/memes", function (req, res) {
         }
     });
 });
-
+app.get("/memes/:id", function(req, res){
+    Meme.findById(req.params.id, function(err, foundMeme){
+        if(err){
+            res.send("Error 404")
+        } else {
+            res.json(foundMeme);
+        }
+    })
+ });
 app.get("/memes/new",function(req,res){
     res.render("new");
 })
