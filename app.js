@@ -11,11 +11,16 @@
 //var normalize=require("normalize-mongoose");
 const express=require("express");
 const mongoose=require('mongoose');
-
+const PORT=process.env.PORT || 8080;
+// mongodb+srv://firstuser:RuZRaYT1noo05vFO@cluster0.5yezs.mongodb.net/<dbname>?retryWrites=true&w=majority
  var bodyParser=require("body-parser");
  //var request=require("request");
  //mongoose connection
-mongoose.connect('mongodb://localhost/memeapp', {
+ //DATABASEURL= 'mongodb+srv://firstuser:RuZRaYT1noo05vFO@cluster0.5yezs.mongodb.net/<dbname>?retryWrites=true&w=majority';
+ 
+//const url = process.env.DATABASEURL ;
+//|| 'mongodb://localhost/memeapp'
+mongoose.connect( 'mongodb+srv://firstuser:RuZRaYT1noo05vFO@cluster0.5yezs.mongodb.net/test?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true
@@ -95,15 +100,7 @@ app.get("/memes", function (req, res) {
         }
     });
 });
-app.get("/memes/:id", function(req, res){
-    Meme.findById(req.params.id, function(err, foundMeme){
-        if(err){
-            res.send("Error 404")
-        } else {
-            res.json(foundMeme);
-        }
-    })
- });
+
 app.get("/memes/new",function(req,res){
     res.render("new");
 })
@@ -188,6 +185,15 @@ app.use(bodyParser.json())
 //       }
 // })
 
-app.listen(8080, function() {
+app.get("/memes/:id", function(req, res){
+    Meme.findById(req.params.id, function(err, foundMeme){
+        if(err){
+            res.send("Error 404")
+        } else {
+            res.json(foundMeme);
+        }
+    })
+ });
+app.listen(PORT, function() {
     console.log('Server listening on port 8081'); 
   });
