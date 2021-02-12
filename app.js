@@ -41,8 +41,8 @@ app.set('views',path.join(__dirname,'views'))
 var  memeSchema=new mongoose.Schema({
     name:String,
     url:String,
-    caption:String
-    //time : { type : Date, default: Date.now }
+    caption:String,
+    time : { type : Date, default: Date.now }
    
     
 });
